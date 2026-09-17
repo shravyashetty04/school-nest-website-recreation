@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   ArrowDown,
   ArrowLeft,
@@ -39,8 +40,12 @@ function Logo() {
   )
 }
 
-function Button({ children, outline = false }: { children: React.ReactNode; outline?: boolean }) {
-  return <a href="#contact" className={`button ${outline ? 'button-outline' : ''}`}>{children}<ArrowRight size={16} /></a>
+function Button({ children, outline = false, href }: { children: React.ReactNode; outline?: boolean; href?: string }) {
+  const content = <>{children}<ArrowRight size={16} /></>;
+  if (href) {
+    return <Link href={href} className={`button ${outline ? 'button-outline' : ''}`}>{content}</Link>;
+  }
+  return <button className={`button ${outline ? 'button-outline' : ''}`}>{content}</button>;
 }
 
 const features = [
@@ -63,12 +68,12 @@ export default function Page() {
           <nav className={menuOpen ? 'nav-links open' : 'nav-links'}>
             <a className="active" href="#top" onClick={() => setMenuOpen(false)}>Home</a><a href="#features" onClick={() => setMenuOpen(false)}>Features</a><a href="#solutions" onClick={() => setMenuOpen(false)}>Solutions</a><a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a><a href="#about" onClick={() => setMenuOpen(false)}>About</a><a href="#resources" onClick={() => setMenuOpen(false)}>Resources <ChevronDown size={12} /></a>
           </nav>
-          <div className="nav-actions"><Search size={18} /><a href="#login" className="login">Log in</a><Button>Get Started</Button></div>
+          <div className="nav-actions"><Search size={18} /><Link href="/login" className="login">Log in</Link><Button href="/signup">Get Started</Button></div>
         </div>
       </header>
 
       <section className="hero">
-        <div className="hero-copy reveal"><p className="eyebrow">A SMARTER WAY TO RUN SCHOOLS</p><h1>Empowering<br />Education<br />for a <em>Brighter</em><br />Tomorrow</h1><p className="hero-text">A complete school management system to simplify daily operations, enhance learning experiences, and build stronger school communities.</p><div className="hero-buttons"><Button>Get Started</Button><Button outline>Request a Demo</Button></div><div className="trust-row"><span><Zap /><b>Easy to Use</b><small>Get started in minutes</small></span><span><ShieldCheck /><b>Secure & Reliable</b><small>Your data is always safe</small></span><span><Users /><b>Dedicated Support</b><small>We&apos;re here to help</small></span></div></div>
+        <div className="hero-copy reveal"><p className="eyebrow">A SMARTER WAY TO RUN SCHOOLS</p><h1>Empowering<br />Education<br />for a <em>Brighter</em><br />Tomorrow</h1><p className="hero-text">A complete school management system to simplify daily operations, enhance learning experiences, and build stronger school communities.</p><div className="hero-buttons"><Button href="/signup">Get Started</Button><Button outline>Request a Demo</Button></div><div className="trust-row"><span><Zap /><b>Easy to Use</b><small>Get started in minutes</small></span><span><ShieldCheck /><b>Secure & Reliable</b><small>Your data is always safe</small></span><span><Users /><b>Dedicated Support</b><small>We&apos;re here to help</small></span></div></div>
         <div className="hero-image-wrap"><img src={studentImage} alt="Student smiling outside school" /><div className="hero-card"><i></i><strong>More Than<br />a School System</strong><small>SIMPLIFY &bull; MANAGE &bull; GROW</small></div></div>
       </section>
 
@@ -178,7 +183,7 @@ export default function Page() {
             <div className="footer-middle">
               <p>Start your journey with SchoolNest today and<br />experience a smarter, simpler way to manage<br />your school.</p>
               <div className="footer-buttons">
-                <Button>Get Started</Button>
+                <Button href="/signup">Get Started</Button>
                 <Button outline>Contact Sales</Button>
               </div>
             </div>
