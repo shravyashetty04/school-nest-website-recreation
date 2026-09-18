@@ -20,6 +20,12 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const data = await response.json();
 
   if (!response.ok) {
+    if (response.status === 401 && typeof window !== 'undefined') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('userName');
+      window.location.href = '/login';
+    }
     throw new Error(data.message || data.error || 'Something went wrong');
   }
 

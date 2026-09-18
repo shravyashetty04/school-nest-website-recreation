@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/lib/api';
+import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 
 export default function Signup() {
@@ -20,7 +22,7 @@ export default function Signup() {
     setLoading(true);
     
     try {
-      const res = await fetch('http://localhost:5000/api/v1/auth/register', {
+      const res = await fetch(`${API_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, schoolName }),

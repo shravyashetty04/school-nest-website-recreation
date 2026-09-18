@@ -192,9 +192,6 @@ export default function Page() {
               <p>Education<br />Today.<br />Brighter<br />Tomorrows.</p>
             </div>
           </div>
-          <div className="footer-image">
-            <img src="/placeholder.jpg" alt="School Campus" />
-          </div>
         </div>
       </footer>
     </main>
